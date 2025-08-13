@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsStudent;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfAuthenticatedCustom;
 use Illuminate\Foundation\Application;
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'isAdmin' => IsAdmin::class,
+            'isStudent' => IsStudent::class,
             'guest' => RedirectIfAuthenticatedCustom::class,
         ]);
     })

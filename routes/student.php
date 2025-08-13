@@ -1,15 +1,19 @@
 <?php
-
-use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Admin\Auth\NewPasswordController;
-use App\Http\Controllers\Admin\Auth\PasswordController;
-use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
-use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Student\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Student\Auth\NewPasswordController;
+use App\Http\Controllers\Student\Auth\PasswordController;
+use App\Http\Controllers\Student\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Student\ProfileController;
+use App\Http\Controllers\Student\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 
+Route::prefix('student')->name('student.')->group(function () {
+    Route::group(['middleware' => ['guest:student']], function () {
+        Route::get('register', [RegisteredUserController::class, 'create'])
+            ->name('register');
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::group(['middleware' => ['guest:admin']], function () {
+        Route::post('register', [RegisteredUserController::class, 'store']);
+
         Route::get('login', [AuthenticatedSessionController::class, 'create'])
             ->name('login');
 
@@ -28,8 +32,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('password.store');
     });
 
-    Route::middleware('isAdmin')->group(function () {
-        Route::view('/dashboard', 'admin.dashboard')
+    Route::middleware('isStudent')->group(function () {
+        Route::view('/dashboard', 'student.dashboard')
             ->name('dashboard');
 
         Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -42,5 +46,3 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('logout');
     });
 });
-
-

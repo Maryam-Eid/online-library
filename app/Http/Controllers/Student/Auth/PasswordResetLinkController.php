@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\Student\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use App\Models\Student;
 use App\Notifications\auth\CustomResetPassword;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class PasswordResetLinkController extends Controller
      */
     public function create(): View
     {
-        return view('admin.auth.forgot-password');
+        return view('student.auth.forgot-password');
     }
 
     /**
@@ -28,14 +28,17 @@ class PasswordResetLinkController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'email' => ['required', 'email', 'exists:admins,email'],
+            'email' => ['required', 'email', 'exists:students,email'],
         ]);
 
-        $admin = Admin::where('email', $request->email)->first();
+        // We will send the password reset link to this user. Once we have attempted
+        // to send the link, we will examine the response then see the message we
+        // need to show to the user. Finally, we'll send out a proper response.
+        $student = Student::where('email', $request->email)->first();
 
-        $token = Password::broker('admins')->createToken($admin);
+        $token = Password::broker('students')->createToken($student);
 
-        $admin->notify(new CustomResetPassword($token, 'admin'));
+        $student->notify(new CustomResetPassword($token, 'student'));
 
         return back()->with('success', 'Password reset link sent successfully!')->onlyInput('email');
     }

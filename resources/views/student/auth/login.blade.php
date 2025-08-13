@@ -1,4 +1,4 @@
-<x-admin>
+<x-student>
     <x-slot:title>Login</x-slot:title>
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -12,7 +12,7 @@
         </div>
 
         <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="{{ route('admin.login') }}" method="POST" class="space-y-6">
+            <form action="{{ route('student.login') }}" method="POST" class="space-y-6">
                 @csrf
 
                 <div>
@@ -49,7 +49,7 @@
                         </label>
                     </div>
                     <div class="text-sm">
-                        <a href="{{ route('admin.password.request') }}" class="font-semibold text-indigo-400 hover:text-indigo-300">Forgot password?</a>
+                        <a href="{{ route('student.password.request') }}" class="font-semibold text-indigo-400 hover:text-indigo-300">Forgot password?</a>
                     </div>
                 </div>
 
@@ -60,6 +60,10 @@
                     </button>
                 </div>
             </form>
+            <p class="mt-10 text-center text-sm/6 text-gray-400">
+                Not registered?
+                <a href="{{ route('student.register') }}" class="font-semibold text-indigo-400 hover:text-indigo-300">Register now!</a>
+            </p>
         </div>
     </div>
-</x-admin>
+</x-student>

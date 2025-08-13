@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\Student\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -16,11 +16,11 @@ class PasswordController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'current_password' => ['required', 'current_password:admin'],
+            'current_password' => ['required', 'current_password:student'],
             'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
 
-        auth('admin')->user()->update([
+        auth('student')->user()->update([
             'password' => Hash::make($validated['password']),
         ]);
 

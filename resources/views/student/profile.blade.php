@@ -1,7 +1,7 @@
-<x-admin-dashboard>
+<x-student-dashboard>
     <x-slot:title>Profile</x-slot:title>
     <div class="mt-10">
-        <form action="{{ route('admin.profile.update') }}" method="post" class="space-y-8 bg-gray-800 p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+        <form action="{{ route('student.profile.update') }}" method="post" class="space-y-8 bg-gray-800 p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
             @csrf
             @method('PUT')
             <section class="border-b border-white/20 pb-8">
@@ -22,11 +22,10 @@
                         <input id="email" name="email" type="email" autocomplete="email" value="{{ $user->email }}"
                                class="w-full rounded-md bg-gray-700 px-4 py-2 text-white placeholder-gray-400
                                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
-
+                    </div>
                     @error('email')
                     <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
                     @enderror
-                    </div>
                 </div>
             </section>
 
@@ -42,7 +41,7 @@
     </div>
 
     <div class="mt-10">
-        <form action="{{ route('admin.password.update') }}" method="post" class="space-y-8 bg-gray-800 p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+        <form action="{{ route('student.password.update') }}" method="post" class="space-y-8 bg-gray-800 p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
             @csrf
             @method('PUT')
             <section class="border-b border-white/20 pb-8">
@@ -53,9 +52,9 @@
                         <input id="current_password" name="current_password" type="password"
                                class="w-full rounded-md bg-gray-700 px-4 py-2 text-white placeholder-gray-400
                                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
-                    @error('current_password')
-                    <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
-                    @enderror
+                        @error('current_password')
+                        <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="sm:col-span-3">
@@ -73,7 +72,7 @@
                         <input id="password_confirmation" name="password_confirmation" type="password"
                                class="w-full rounded-md bg-gray-700 px-4 py-2 text-white placeholder-gray-400
                                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
-                            @error('password_confirmation')
+                        @error('password_confirmation')
                         <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
@@ -91,4 +90,4 @@
             </div>
         </form>
     </div>
-</x-admin-dashboard>
+</x-student-dashboard>

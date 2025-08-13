@@ -1,4 +1,4 @@
-<x-admin>
+<x-student>
     <x-slot:title>{{ $title?? 'Dashboard' }}</x-slot:title>
     <div class="min-h-full">
         <nav class="bg-gray-800/50">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-4 flex items-center md:ml-6">
-                            <form action="{{ route('admin.logout') }}" method="post">
+                            <form action="{{ route('student.logout') }}" method="post">
                                 @csrf
                                 <button type="submit"
                                         class="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
@@ -46,12 +46,12 @@
                                          popover
                                          class="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1 outline outline-1 -outline-offset-1 outline-white/10 transition-all duration-100 ease-out">
                                     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                                        <div>{{ \Illuminate\Support\Facades\Auth::guard('admin')->user()->name }}</div>
+                                        <div>{{ \Illuminate\Support\Facades\Auth::guard('student')->user()->name }}</div>
                                         <div
-                                            class="font-medium truncate">{{ \Illuminate\Support\Facades\Auth::guard('admin')->user()->email }}</div>
+                                            class="font-medium truncate">{{ \Illuminate\Support\Facades\Auth::guard('student')->user()->email }}</div>
                                     </div>
                                     <hr class="border-gray-600">
-                                    <a href="{{ route('admin.profile.edit') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Your
+                                    <a href="{{ route('student.profile.edit') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Your
                                         profile</a>
                                 </el-menu>
                             </el-dropdown>
@@ -139,14 +139,13 @@
         <main>
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                 @if (session('success'))
-                    <div class="mt-2 bg-teal-700 text-sm text-white rounded-lg p-4" role="alert"
-                         tabindex="-1">
-                        {{ session('success') }}
+                    <div class="mt-2 bg-teal-700 text-sm text-white rounded-lg p-4" role="alert" tabindex="-1">
+                       {{ session('success') }}
                     </div>
-                @endif
+                        @endif
                         {{ $slot }}
                     </div>
         </main>
     </div>
 
-</x-admin>
+</x-student>
