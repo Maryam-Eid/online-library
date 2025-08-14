@@ -45,14 +45,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->names('books');
 
         Route::resource('students', StudentController::class)
+            ->names('students')
             ->only(['index', 'show']);
 
         Route::resource('borrowed', BorrowedBookController::class)
             ->names('borrowed')
             ->only(['index']);
-
-        Route::get('/students/search/{student_id}', [StudentController::class, 'search'])
-            ->name('students.search');
 
         Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
