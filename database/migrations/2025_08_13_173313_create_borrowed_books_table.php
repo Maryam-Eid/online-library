@@ -22,7 +22,7 @@ return new class extends Migration
                 ->constrained()
                 ->CascadeOnDelete();
             $table->dateTime('borrowed_at');
-            $table->dateTime('return_at')->nullable();
+            $table->dateTime('returned_at')->nullable();
             $table->timestamps();
         });
     }

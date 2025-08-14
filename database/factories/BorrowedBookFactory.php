@@ -22,7 +22,7 @@ class BorrowedBookFactory extends Factory
 
         return [
             'borrowed_at' => $borrowedAt,
-            'return_at' => $this->faker->boolean
+            'returned_at' => $this->faker->boolean
                 ? $this->faker->dateTimeBetween($borrowedAt, '+1 month')
                 : null,
         ];

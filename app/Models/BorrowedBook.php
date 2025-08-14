@@ -10,8 +10,13 @@ class BorrowedBook extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['student_id', 'book_id', 'borrowed_at', 'return_at'];
+    protected $fillable = ['student_id', 'book_id', 'borrowed_at', 'returned_at'];
     protected $appends = ['returned'];
+
+    protected $casts =[
+        'returned_at' => 'datetime',
+        'borrowed_at' => 'datetime',
+    ];
 
     public function student(): BelongsTo
     {
@@ -25,6 +30,6 @@ class BorrowedBook extends Model
 
     public function getReturnedAttribute(): bool
     {
-        return $this->return_at !== null;
+        return $this->returned_at !== null;
     }
 }
