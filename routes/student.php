@@ -1,8 +1,12 @@
 <?php
+
 use App\Http\Controllers\Student\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Student\Auth\NewPasswordController;
 use App\Http\Controllers\Student\Auth\PasswordController;
 use App\Http\Controllers\Student\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Student\BookController;
+use App\Http\Controllers\Student\BorrowedBookController;
+use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\ProfileController;
 use App\Http\Controllers\Student\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
@@ -33,12 +37,28 @@ Route::prefix('student')->name('student.')->group(function () {
     });
 
     Route::middleware('isStudent')->group(function () {
-        Route::view('/dashboard', 'student.dashboard')
+        Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
 
-        Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile', [ProfileController::class, 'update'])
+            ->name('profile.update');
+
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])
+            ->name('profile.edit');
+
+        Route::resource('books', BookController::class)
+            ->names('books')
+            ->only(['index']);
+
+        Route::get('/books/{book}/borrowed/{borrowedBook?}', [BookController::class, 'show'])
+            ->name('books.show');
+
+        Route::post('books/{book}/borrow', [BorrowedBookController::class, 'borrow'])
+            ->name('books.borrow');
+
+        Route::post('borrowed/{borrow}/return', [BorrowedBookController::class, 'return'])
+            ->name('borrowed.return');
 
         Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
